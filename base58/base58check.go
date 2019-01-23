@@ -5,8 +5,8 @@
 package base58
 
 import (
-	"crypto/sha256"
 	"errors"
+	"github.com/Groestlcoin/go-groestl-hash/groestl"
 )
 
 // ErrChecksum indicates that the checksum of a check-encoded string does not verify against
@@ -18,8 +18,12 @@ var ErrInvalidFormat = errors.New("invalid format: version and/or checksum bytes
 
 // checksum: first four bytes of sha256^2
 func checksum(input []byte) (cksum [4]byte) {
-	h := sha256.Sum256(input)
-	h2 := sha256.Sum256(h[:])
+	var h1, h2 [64]byte
+	g := groestl.New()
+	g.Write(input)
+	g.Close(h1[:], 0, 0)
+	g.Write(h1[:])
+	g.Close(h2[:], 0, 0)
 	copy(cksum[:], h2[:4])
 	return
 }

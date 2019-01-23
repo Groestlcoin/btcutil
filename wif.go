@@ -101,7 +101,7 @@ func DecodeWIF(wif string) (*WIF, error) {
 		return nil, ErrMalformedPrivateKey
 	}
 
-	// Checksum is first four bytes of double SHA256 of the identifier byte
+	// Checksum is first four bytes of double Groestl512 of the identifier byte
 	// and privKey.  Verify this matches the final 4 bytes of the decoded
 	// private key.
 	var tosum []byte
@@ -110,7 +110,7 @@ func DecodeWIF(wif string) (*WIF, error) {
 	} else {
 		tosum = decoded[:1+btcec.PrivKeyBytesLen]
 	}
-	cksum := chainhash.DoubleHashB(tosum)[:4]
+	cksum := chainhash.DoubleGroestlB(tosum)[:4]
 	if !bytes.Equal(cksum, decoded[decodedLen-4:]) {
 		return nil, ErrChecksumMismatch
 	}
@@ -142,7 +142,7 @@ func (w *WIF) String() string {
 	if w.CompressPubKey {
 		a = append(a, compressMagic)
 	}
-	cksum := chainhash.DoubleHashB(a)[:4]
+	cksum := chainhash.DoubleGroestlB(a)[:4]
 	a = append(a, cksum...)
 	return base58.Encode(a)
 }

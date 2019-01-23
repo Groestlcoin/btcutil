@@ -33,19 +33,19 @@ const (
 func (u AmountUnit) String() string {
 	switch u {
 	case AmountMegaBTC:
-		return "MBTC"
+		return "MGRS"
 	case AmountKiloBTC:
-		return "kBTC"
+		return "kGRS"
 	case AmountBTC:
-		return "BTC"
+		return "GRS"
 	case AmountMilliBTC:
-		return "mBTC"
+		return "mGRS"
 	case AmountMicroBTC:
-		return "μBTC"
+		return "μGRS"
 	case AmountSatoshi:
-		return "Satoshi"
+		return "gro"
 	default:
-		return "1e" + strconv.FormatInt(int64(u), 10) + " BTC"
+		return "1e" + strconv.FormatInt(int64(u), 10) + " GRS"
 	}
 }
 
@@ -82,7 +82,7 @@ func NewAmount(f float64) (Amount, error) {
 	case math.IsInf(f, 1):
 		fallthrough
 	case math.IsInf(f, -1):
-		return 0, errors.New("invalid bitcoin amount")
+		return 0, errors.New("invalid groestlcoin amount")
 	}
 
 	return round(f * SatoshiPerBitcoin), nil
