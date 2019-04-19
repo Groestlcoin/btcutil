@@ -417,7 +417,7 @@ func (k *ExtendedKey) String() string {
 		serializedBytes = append(serializedBytes, k.pubKeyBytes()...)
 	}
 
-	checkSum := chainhash.DoubleHashB(serializedBytes)[:4]
+	checkSum := chainhash.DoubleGroestlB(serializedBytes)[:4]
 	serializedBytes = append(serializedBytes, checkSum...)
 	return base58.Encode(serializedBytes)
 }
@@ -518,7 +518,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	// Split the payload and checksum up and ensure the checksum matches.
 	payload := decoded[:len(decoded)-4]
 	checkSum := decoded[len(decoded)-4:]
-	expectedCheckSum := chainhash.DoubleHashB(payload)[:4]
+	expectedCheckSum := chainhash.DoubleGroestlB(payload)[:4]
 	if !bytes.Equal(checkSum, expectedCheckSum) {
 		return nil, ErrBadChecksum
 	}
