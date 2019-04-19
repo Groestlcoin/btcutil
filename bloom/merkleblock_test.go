@@ -16,9 +16,14 @@ import (
 )
 
 func TestMerkleBlock3(t *testing.T) {
-	blockStr := "0100000079cda856b143d9db2c1caff01d1aecc8630d30625d10e8b" +
-		"4b8b0000000000000b50cc069d6a3e33e3ff84a5c41d9d3febe7c770fdc" +
-		"c96b2c3ff60abe184f196367291b4d4c86041b8fa45d630101000000010" +
+	blockStr := "01000000" +
+		"79cda856b143d9db2c1caff01d1aecc8630d30625d10e8b4b8b0000000000000" +
+		"48d548434a07b3a05651302acae61551c5df997dc3be1d95e24117f3b9972e70" +
+		"67291b4d" +
+		"4c86041b" +
+		"8fa45d63" +
+		"01" +
+		"01000000010" +
 		"00000000000000000000000000000000000000000000000000000000000" +
 		"0000ffffffff08044c86041b020a02ffffffff0100f2052a01000000434" +
 		"104ecd3229b0571c3be876feaac0442a9f13c5a572742927af1dc623353" +
@@ -34,10 +39,15 @@ func TestMerkleBlock3(t *testing.T) {
 		t.Errorf("TestMerkleBlock3 NewBlockFromBytes failed: %v", err)
 		return
 	}
+	merkleRoot, err := blk.TxHash(0)
+	if err != nil {
+		t.Errorf("TestMerkleBlock3 blk.TxHash failed: %v", err)
+	}
+	t.Logf("TestMerkleBlock3 merkle root %v", merkleRoot)
 
 	f := bloom.NewFilter(10, 0, 0.000001, wire.BloomUpdateAll)
 
-	inputStr := "63194f18be0af63f2c6bc9dc0f777cbefed3d9415c4af83f3ee3a3d669c00cb5"
+	inputStr := "702e97b9f31741e2951dbec37d99dfc55115e6ca2a305156a0b3074a4348d548"
 	hash, err := chainhash.NewHashFromStr(inputStr)
 	if err != nil {
 		t.Errorf("TestMerkleBlock3 NewHashFromStr failed: %v", err)
@@ -48,11 +58,12 @@ func TestMerkleBlock3(t *testing.T) {
 
 	mBlock, _ := bloom.NewMerkleBlock(blk, f)
 
-	wantStr := "0100000079cda856b143d9db2c1caff01d1aecc8630d30625d10e8b4" +
-		"b8b0000000000000b50cc069d6a3e33e3ff84a5c41d9d3febe7c770fdcc" +
-		"96b2c3ff60abe184f196367291b4d4c86041b8fa45d630100000001b50c" +
-		"c069d6a3e33e3ff84a5c41d9d3febe7c770fdcc96b2c3ff60abe184f196" +
-		"30101"
+	wantStr := "01000000" +
+		"79cda856b143d9db2c1caff01d1aecc8630d30625d10e8b4b8b0000000000000" +
+		"48d548434a07b3a05651302acae61551c5df997dc3be1d95e24117f3b9972e70" +
+		"67291b4d4c86041b8fa45d63" + "0100000001" +
+		"48d548434a07b3a05651302acae61551c5df997dc3be1d95e24117f3b9972e70" +
+		"0101"
 	want, err := hex.DecodeString(wantStr)
 	if err != nil {
 		t.Errorf("TestMerkleBlock3 DecodeString failed: %v", err)
@@ -68,7 +79,7 @@ func TestMerkleBlock3(t *testing.T) {
 
 	if !bytes.Equal(want, got.Bytes()) {
 		t.Errorf("TestMerkleBlock3 failed merkle block comparison: "+
-			"got %v want %v", got.Bytes(), want)
+			"got %x want %x", got.Bytes(), want)
 		return
 	}
 }

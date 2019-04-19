@@ -7,6 +7,7 @@ package btcutil
 import (
 	"bytes"
 	"errors"
+	"fmt"
 
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
@@ -18,7 +19,7 @@ import (
 // key cannot be decoded due to being improperly formatted.  This may occur
 // if the byte length is incorrect or an unexpected magic number was
 // encountered.
-var ErrMalformedPrivateKey = errors.New("malformed private key")
+var ErrMalformedPrivateKey = fmt.Errorf("malformed private key")
 
 // compressMagic is the magic byte used to identify a WIF encoding for
 // an address created from a compressed serialized public key.
@@ -112,6 +113,7 @@ func DecodeWIF(wif string) (*WIF, error) {
 	}
 	cksum := chainhash.DoubleGroestlB(tosum)[:4]
 	if !bytes.Equal(cksum, decoded[decodedLen-4:]) {
+		// return nil, fmt.Errorf("checksum mismatch: input '%s', valid '%s'", wif, base58.CheckEncode(tosum[1:], decoded[0]))
 		return nil, ErrChecksumMismatch
 	}
 

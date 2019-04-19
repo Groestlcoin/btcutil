@@ -520,6 +520,7 @@ func NewKeyFromString(key string) (*ExtendedKey, error) {
 	checkSum := decoded[len(decoded)-4:]
 	expectedCheckSum := chainhash.DoubleGroestlB(payload)[:4]
 	if !bytes.Equal(checkSum, expectedCheckSum) {
+		// return nil, fmt.Errorf("bad extended key checksum, input '%s', correct '%s'", key, base58.CheckEncode(decoded[1:len(decoded)-4], decoded[0]))
 		return nil, ErrBadChecksum
 	}
 

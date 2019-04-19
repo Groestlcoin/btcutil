@@ -181,6 +181,7 @@ func DecodeAddress(addr string, defaultNet *chaincfg.Params) (Address, error) {
 	// Switch on decoded length to determine the type.
 	decoded, netID, err := base58.CheckDecode(addr)
 	if err != nil {
+		// return nil, err
 		if err == base58.ErrChecksum {
 			return nil, ErrChecksumMismatch
 		}

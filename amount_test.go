@@ -119,40 +119,40 @@ func TestAmountUnitConversions(t *testing.T) {
 		s         string
 	}{
 		{
-			name:      "MBTC",
+			name:      "MGRS",
 			amount:    MaxSatoshi,
 			unit:      AmountMegaBTC,
 			converted: 21,
-			s:         "21 MBTC",
+			s:         "21 MGRS",
 		},
 		{
-			name:      "kBTC",
+			name:      "kGRS",
 			amount:    44433322211100,
 			unit:      AmountKiloBTC,
 			converted: 444.33322211100,
-			s:         "444.333222111 kBTC",
+			s:         "444.333222111 kGRS",
 		},
 		{
-			name:      "BTC",
+			name:      "GRS",
 			amount:    44433322211100,
 			unit:      AmountBTC,
 			converted: 444333.22211100,
-			s:         "444333.222111 BTC",
+			s:         "444333.222111 GRS",
 		},
 		{
-			name:      "mBTC",
+			name:      "mGRS",
 			amount:    44433322211100,
 			unit:      AmountMilliBTC,
 			converted: 444333222.11100,
-			s:         "444333222.111 mBTC",
+			s:         "444333222.111 mGRS",
 		},
 		{
 
-			name:      "μBTC",
+			name:      "μGRS",
 			amount:    44433322211100,
 			unit:      AmountMicroBTC,
 			converted: 444333222111.00,
-			s:         "444333222111 μBTC",
+			s:         "444333222111 μGRS",
 		},
 		{
 
@@ -160,7 +160,7 @@ func TestAmountUnitConversions(t *testing.T) {
 			amount:    44433322211100,
 			unit:      AmountSatoshi,
 			converted: 44433322211100,
-			s:         "44433322211100 Satoshi",
+			s:         "44433322211100 gro",
 		},
 		{
 
@@ -168,7 +168,7 @@ func TestAmountUnitConversions(t *testing.T) {
 			amount:    44433322211100,
 			unit:      AmountUnit(-1),
 			converted: 4443332.2211100,
-			s:         "4443332.22111 1e-1 BTC",
+			s:         "4443332.22111 1e-1 GRS",
 		},
 	}
 
@@ -209,37 +209,37 @@ func TestAmountMulF64(t *testing.T) {
 		res  Amount
 	}{
 		{
-			name: "Multiply 0.1 BTC by 2",
+			name: "Multiply 0.1 GRS by 2",
 			amt:  100e5, // 0.1 BTC
 			mul:  2,
 			res:  200e5, // 0.2 BTC
 		},
 		{
-			name: "Multiply 0.2 BTC by 0.02",
+			name: "Multiply 0.2 GRS by 0.02",
 			amt:  200e5, // 0.2 BTC
 			mul:  1.02,
 			res:  204e5, // 0.204 BTC
 		},
 		{
-			name: "Multiply 0.1 BTC by -2",
+			name: "Multiply 0.1 GRS by -2",
 			amt:  100e5, // 0.1 BTC
 			mul:  -2,
 			res:  -200e5, // -0.2 BTC
 		},
 		{
-			name: "Multiply 0.2 BTC by -0.02",
+			name: "Multiply 0.2 GRS by -0.02",
 			amt:  200e5, // 0.2 BTC
 			mul:  -1.02,
 			res:  -204e5, // -0.204 BTC
 		},
 		{
-			name: "Multiply -0.1 BTC by 2",
+			name: "Multiply -0.1 GRS by 2",
 			amt:  -100e5, // -0.1 BTC
 			mul:  2,
 			res:  -200e5, // -0.2 BTC
 		},
 		{
-			name: "Multiply -0.2 BTC by 0.02",
+			name: "Multiply -0.2 GRS by 0.02",
 			amt:  -200e5, // -0.2 BTC
 			mul:  1.02,
 			res:  -204e5, // -0.204 BTC

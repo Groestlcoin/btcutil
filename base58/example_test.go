@@ -40,7 +40,7 @@ func ExampleEncode() {
 // This example demonstrates how to decode Base58Check encoded data.
 func ExampleCheckDecode() {
 	// Decode an example Base58Check encoded data.
-	encoded := "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+	encoded := "1A1zP1eP5QGefi2DMPTfTL5SLmv7Djgrro"
 	decoded, version, err := base58.CheckDecode(encoded)
 	if err != nil {
 		fmt.Println(err)
@@ -67,5 +67,5 @@ func ExampleCheckEncode() {
 	fmt.Println("Encoded Data:", encoded)
 
 	// Output:
-	// Encoded Data: 182iP79GRURMp7oMHDU
+	// Encoded Data: 182iP79GRURMp8SP86K
 }

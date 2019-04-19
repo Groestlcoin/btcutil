@@ -6,12 +6,13 @@ package base58
 
 import (
 	"errors"
+	"fmt"
 	"github.com/Groestlcoin/go-groestl-hash/groestl"
 )
 
 // ErrChecksum indicates that the checksum of a check-encoded string does not verify against
 // the checksum.
-var ErrChecksum = errors.New("checksum error")
+var ErrChecksum = fmt.Errorf("checksum error")
 
 // ErrInvalidFormat indicates that the check-encoded string has an invalid format.
 var ErrInvalidFormat = errors.New("invalid format: version and/or checksum bytes missing")
@@ -48,6 +49,8 @@ func CheckDecode(input string) (result []byte, version byte, err error) {
 	var cksum [4]byte
 	copy(cksum[:], decoded[len(decoded)-4:])
 	if checksum(decoded[:len(decoded)-4]) != cksum {
+		// version = 36 // F...
+		// return nil, 0, fmt.Errorf("checksum error, input '%s', valid '%s'", input, CheckEncode(decoded[1:len(decoded)-4], version))
 		return nil, 0, ErrChecksum
 	}
 	payload := decoded[1 : len(decoded)-4]

@@ -10,17 +10,17 @@ import (
 func ExampleAmount() {
 
 	a := btcutil.Amount(0)
-	fmt.Println("Zero Satoshi:", a)
+	fmt.Println("Zero gro:", a)
 
 	a = btcutil.Amount(1e8)
-	fmt.Println("100,000,000 Satoshis:", a)
+	fmt.Println("100,000,000 gros:", a)
 
 	a = btcutil.Amount(1e5)
-	fmt.Println("100,000 Satoshis:", a)
+	fmt.Println("100,000 gros:", a)
 	// Output:
-	// Zero Satoshi: 0 BTC
-	// 100,000,000 Satoshis: 1 BTC
-	// 100,000 Satoshis: 0.001 BTC
+	// Zero gro: 0 GRS
+	// 100,000,000 gros: 1 GRS
+	// 100,000 gros: 0.001 GRS
 }
 
 func ExampleNewAmount() {
@@ -52,25 +52,25 @@ func ExampleNewAmount() {
 	}
 	fmt.Println(amountNaN) //Output 4
 
-	// Output: 1 BTC
-	// 0.01234567 BTC
-	// 0 BTC
-	// invalid bitcoin amount
+	// Output: 1 GRS
+	// 0.01234567 GRS
+	// 0 GRS
+	// invalid groestlcoin amount
 }
 
 func ExampleAmount_unitConversions() {
 	amount := btcutil.Amount(44433322211100)
 
-	fmt.Println("Satoshi to kBTC:", amount.Format(btcutil.AmountKiloBTC))
-	fmt.Println("Satoshi to BTC:", amount)
-	fmt.Println("Satoshi to MilliBTC:", amount.Format(btcutil.AmountMilliBTC))
-	fmt.Println("Satoshi to MicroBTC:", amount.Format(btcutil.AmountMicroBTC))
-	fmt.Println("Satoshi to Satoshi:", amount.Format(btcutil.AmountSatoshi))
+	fmt.Println("gro to kGRS:", amount.Format(btcutil.AmountKiloBTC))
+	fmt.Println("gro to GRS:", amount)
+	fmt.Println("gro to MilliGRS:", amount.Format(btcutil.AmountMilliBTC))
+	fmt.Println("gro to MicroGRS:", amount.Format(btcutil.AmountMicroBTC))
+	fmt.Println("gro to gro:", amount.Format(btcutil.AmountSatoshi))
 
 	// Output:
-	// Satoshi to kBTC: 444.333222111 kBTC
-	// Satoshi to BTC: 444333.222111 BTC
-	// Satoshi to MilliBTC: 444333222.111 mBTC
-	// Satoshi to MicroBTC: 444333222111 μBTC
-	// Satoshi to Satoshi: 44433322211100 Satoshi
+	// gro to kGRS: 444.333222111 kGRS
+	// gro to GRS: 444333.222111 GRS
+	// gro to MilliGRS: 444333222.111 mGRS
+	// gro to MicroGRS: 444333222111 μGRS
+	// gro to gro: 44433322211100 gro
 }

@@ -40,11 +40,11 @@ func TestEncodeDecodeWIF(t *testing.T) {
 	}{
 		{
 			wif1,
-			"5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbTLvyTJ",
+			"5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbRuerSS",
 		},
 		{
 			wif2,
-			"cV1Y7ARUr9Yx7BR55nTdnR7ZXNJphZtCCMBTEZBJe1hXt2kB684q",
+			"cV1Y7ARUr9Yx7BR55nTdnR7ZXNJphZtCCMBTEZBJe1hXt2oHRRkt",
 		},
 	}
 
